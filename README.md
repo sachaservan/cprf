@@ -21,7 +21,7 @@ Prototype implementation of constrained PRFs for inner product predicates from [
 
 ## ⚠️ Important Warning
 
-<b>This implementation of is intended for _research purposes only_. The code has NOT been vetted by security experts.
+<b>This implementation is intended for _research purposes only_. The code has NOT been vetted by security experts.
 As such, no portion of the code should be used in any real-world or production setting!</b>
 
 ## License
