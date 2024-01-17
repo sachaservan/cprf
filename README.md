@@ -1,6 +1,6 @@
 # Constrained PRFs for Inner Product Predicates
 
-Prototype implementation of constrained PRFs for inner product predicates from [this paper](https://eprint.iacr.org/2024/TBD). 
+Prototype implementation of constrained PRFs for inner product predicates from [this paper](https://eprint.iacr.org/2024/58). 
 
 | **Code organization** ||
 | :--- | :---|
@@ -14,7 +14,7 @@ Prototype implementation of constrained PRFs for inner product predicates from [
 2. Run ```go test -bench=.```
 
 ## TODOs (nice-to-haves)
-- [ ] implement the VDLPN-based construction from [the paper](https://eprint.iacr.org/2024/TBD). 
+- [ ] implement the VDLPN-based construction from [the paper](https://eprint.iacr.org/2024/58). 
 - [ ] improve performance of the OWF-based construction by using a faster universal hashing technique
 - [ ] optimize (lots of room for possible optimizations currently left on the table)
 
