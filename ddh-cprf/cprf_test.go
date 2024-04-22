@@ -3,6 +3,7 @@ package ddhcprf
 import (
 	"crypto/elliptic"
 	"crypto/rand"
+	"fmt"
 	"math/big"
 	mrand "math/rand"
 	"testing"
@@ -78,14 +79,26 @@ func TestCPRFUnauthorized(t *testing.T) {
 func BenchmarkEval(b *testing.B) {
 	p := elliptic.P256().Params().N
 	n := 128
-	length := 700
-	pp, msk, _ := KeyGen(n, length)
-	x, _ := generateRandomVector(length, p)
 
-	b.ResetTimer()
+	// Run the benchmark for different parameter sets
+	for _, params := range []struct{ length int }{
+		{10},
+		{50},
+		{100},
+		{500},
+		{1000},
+	} {
+		b.Run(fmt.Sprintf("length=%d", params.length), func(b *testing.B) {
 
-	for i := 0; i < b.N; i++ {
-		msk.Eval(pp, x)
+			pp, msk, _ := KeyGen(n, params.length)
+			x, _ := generateRandomVector(params.length, p)
+
+			b.ResetTimer()
+
+			for i := 0; i < b.N; i++ {
+				msk.Eval(pp, x)
+			}
+		})
 	}
 }
 

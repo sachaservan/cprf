@@ -3,6 +3,7 @@ package rocprf
 import (
 	"bytes"
 	"crypto/rand"
+	"fmt"
 	"math/big"
 	mrand "math/rand"
 	"testing"
@@ -79,14 +80,26 @@ func TestCPRFUnauthorized(t *testing.T) {
 
 func BenchmarkEval(b *testing.B) {
 	modulus, _ := big.NewInt(0).SetString("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFF61", 16)
-	length := 10
-	msk, _ := KeyGen(modulus, length)
 
-	x, _ := generateRandomVector(length, modulus)
+	// Run the benchmark for different parameter sets
+	for _, params := range []struct{ length int }{
+		{10},
+		{50},
+		{100},
+		{500},
+		{1000},
+	} {
+		b.Run(fmt.Sprintf("length=%d", params.length), func(b *testing.B) {
 
-	b.ResetTimer()
+			msk, _ := KeyGen(modulus, params.length)
+			x, _ := generateRandomVector(params.length, modulus)
 
-	for i := 0; i < b.N; i++ {
-		msk.Eval(x)
+			b.ResetTimer()
+
+			for i := 0; i < b.N; i++ {
+				msk.Eval(x)
+			}
+		})
 	}
+
 }

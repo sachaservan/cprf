@@ -3,6 +3,7 @@ package owfcprf
 import (
 	"crypto/rand"
 	"crypto/sha256"
+	"math"
 	"math/big"
 
 	"github.com/sachaservan/cprf/owf-cprf/fp"
@@ -32,11 +33,11 @@ type ConstrainedKey struct {
 
 func KeyGen(sec int, length int, bound int) (*PublicParameters, *MasterKey, error) {
 
-	t := length * bound // max number of inner products possible
+	t := int64(math.Pow(float64(bound), float64(length)))
 
 	// parameters from Lemma 3 of the paper, computed as a function of t
-	m := sec * (3*t + 5) * (t + 1)
-	modbits := sec * (2*t + 6)
+	m := int64(sec) * (3*t + 5) * (t + 1)
+	modbits := int64(sec) * (2*t + 6)
 
 	// compute field modulus (fake)
 	p := big.NewInt(1)
@@ -51,7 +52,7 @@ func KeyGen(sec int, length int, bound int) (*PublicParameters, *MasterKey, erro
 	pp.field = fp.NewField(p)
 
 	pp.poly = make([]*fp.FieldElement, m)
-	for i := 0; i < m; i++ {
+	for i := int64(0); i < m; i++ {
 		pp.poly[i], err = pp.field.RandomElement()
 		if err != nil {
 			return nil, nil, err
