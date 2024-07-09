@@ -18,6 +18,18 @@ Prototype implementation of constrained PRFs for inner product predicates from [
 - [ ] improve performance of the OWF-based construction by using a faster universal hashing technique
 - [ ] optimize (lots of room for possible optimizations currently left on the table)
 
+# Citations
+```
+@misc{cprfs,
+      author = {Sacha Servan-Schreiber},
+      title = {Constrained Pseudorandom Functions for Inner-Product Predicates from Weaker Assumptions},
+      howpublished = {Cryptology ePrint Archive, Paper 2024/058},
+      year = {2024},
+      note = {\url{https://eprint.iacr.org/2024/058}},
+      url = {https://eprint.iacr.org/2024/058}
+}
+```
+
 
 ## ⚠️ Important Warning
 
