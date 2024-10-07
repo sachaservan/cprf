@@ -1,10 +1,7 @@
 # Constrained PRFs for Inner Product Predicates
 
-Prototype implementation of constrained PRFs for inner product predicates from [this paper](https://eprint.iacr.org/2024/58).
-
-## Introduction
-
-This repository contains implementations of Constrained Pseudorandom Functions (CPRFs) for inner product predicates. It includes two different constructions: one based on random oracles and another based on the Decisional Diffie-Hellman (DDH) assumption. These implementations are designed for research purposes and to demonstrate the concepts presented in the associated paper.
+This repository contains implementations of Constrained Pseudorandom Functions (CPRFs) for inner product predicates from [this paper](https://eprint.iacr.org/2024/58) (to appear at AsiaCrypt 2024).
+It includes two different constructions: one based on random oracles and another based on the Decisional Diffie-Hellman (DDH) assumption. The implementation can be used to reproduce Tables 2 & 3 from the paper. 
 
 ## Code Organization
 
