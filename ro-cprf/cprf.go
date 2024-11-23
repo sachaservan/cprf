@@ -3,6 +3,7 @@ package rocprf
 import (
 	"crypto/rand"
 	"crypto/sha256"
+	"fmt"
 	"math/big"
 )
 
@@ -42,7 +43,7 @@ func KeyGen(modulus *big.Int, length int) (*MasterKey, error) {
 	for i := 0; i < length; i++ {
 		msk.z0[i], err = generateRandomBigInt(modulus)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to generate master key component %d: %w", i, err)
 		}
 	}
 
@@ -62,7 +63,7 @@ func (msk *MasterKey) Constrain(z []*big.Int) (*ConstrainedKey, error) {
 
 	delta, err := generateRandomBigInt(modulus)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to generate delta for constraint: %w", err)
 	}
 
 	// the constraint key is computed as z0 - z*Delta
@@ -130,8 +131,7 @@ func hashSHA256(k *big.Int, x []*big.Int) []byte {
 func generateRandomBigInt(max *big.Int) (*big.Int, error) {
 	randomInt, err := rand.Int(rand.Reader, max)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to generate random number: %w", err)
 	}
-
 	return randomInt, nil
 }

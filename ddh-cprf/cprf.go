@@ -4,6 +4,7 @@ import (
 	"crypto/elliptic"
 	"crypto/rand"
 	"crypto/sha256"
+	"fmt"
 	"math/big"
 
 	"github.com/sachaservan/cprf/ddh-cprf/ec"
@@ -57,7 +58,7 @@ func KeyGen(n int, length int) (*PublicParameters, *MasterKey, error) {
 		for j := 0; j < length; j++ {
 			msk.z0[i][j], err = generateRandomBigInt(p)
 			if err != nil {
-				return nil, nil, err
+				return nil, nil, fmt.Errorf("failed to generate master key component (%d,%d): %w", i, j, err)
 			}
 		}
 	}
@@ -96,7 +97,7 @@ func (msk *MasterKey) Constrain(z []*big.Int) (*ConstrainedKey, error) {
 
 		deltai, err := generateRandomBigInt(p)
 		if err != nil {
-			return nil, err
+			return nil, fmt.Errorf("failed to generate delta_%d for constraint: %w", i, err)
 		}
 
 		for j := 0; j < length; j++ {
@@ -270,8 +271,7 @@ func hashSHA256(x []*big.Int, keyFPs []*ec.Point) []bool {
 func generateRandomBigInt(max *big.Int) (*big.Int, error) {
 	randomInt, err := rand.Int(rand.Reader, max)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("failed to generate random number: %w", err)
 	}
-
 	return randomInt, nil
 }
