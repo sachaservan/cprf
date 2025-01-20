@@ -57,21 +57,19 @@ We thank [Maxime Bombar](https://github.com/mbombar) for reviewing and providing
 
 # Citations
 ```
-@inproceedings{cprf,
+@InProceedings{cprf,
   author       = {Sacha Servan-Schreiber},
   title        = {Constrained Pseudorandom Functions for Inner-Product Predicates from Weaker Assumptions},
-  note         = {\url{https://eprint.iacr.org/2024/058}},
-  url          = {https://eprint.iacr.org/2024/058}
+  pages =        "232--265",
   editor       = {Kai-Min Chung and
                   Yu Sasaki},
-  booktitle    = {Advances in Cryptology - {ASIACRYPT} 2024 - 30th
-                  International Conference on the Theory and
-                  Application of Cryptology and Information Security,
-                  Kolkata, India, December 9-13, 2024
-                  },
-  publisher    = {Springer},
-  year         = {2024},
+  publisher    = {Springer, Singapore},
+  booktitle =    {ASIACRYPT 2024, Part II, LNCS 15485},
+  month = "December",
+  year =         2024,
 }
+
+
 ```
 
 ## ⚠️ Important Warning
